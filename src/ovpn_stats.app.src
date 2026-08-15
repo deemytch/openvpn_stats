@@ -1,0 +1,13 @@
+{application, ovpn_stats, [
+    {description, "ovpn-widget-feeder"},
+    {vsn, "0.1.0"},
+    {registered, []},
+    {mod, {ovpn_stats_app, []}},
+    {applications, [
+        kernel, stdlib, ssh, sasl, logger
+    ]},
+    {env, []},
+    {modules, []},
+    {licenses, ["Apache-2.0"]},
+    {links, []}
+ ]}.
