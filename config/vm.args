@@ -1,0 +1,13 @@
+-name ovpn_stats@127.0.0.1
+-setcookie 5QFTATR06PsdN40z8+7cu3em9Tf4tnt8/Kvjn0r9O4mauqFFJb17ph8fZQUx8AVv
+
++K true
++A 30
++SDio 4
++pc unicode
+
+# перезапуск ноды при зависании; HEART_COMMAND проставит стартовый скрипт
+# при запуске под systemd лучше убрать
+-heart
+
+-env ERL_CRASH_DUMP log/erl_crash.dump
