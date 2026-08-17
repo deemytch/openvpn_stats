@@ -7,7 +7,8 @@ Look at https://github.com/deemytch/list_widget
 Build
 -----
 
-    $ rebar3 compile
+    rebar3 compile
+    rebar3 as prod release
 
 Then you know what to do.
 

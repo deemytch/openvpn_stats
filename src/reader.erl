@@ -87,7 +87,7 @@ send_next(#state{outcache = [Line| Rest]} = State) ->
 
 parse_client_list(Data) when is_binary(Data) ->
   Text = re:split(binary_to_list(Data), "[\n\r]+", [{return, list}]),
-  case lists:any(fun("CLIENT_LIST" ++ _) -> true; (_) -> false end, Text) of
+  case is_status_log(Text) of
     true -> % это статус
       ets:delete_all_objects(clients_list),
       parse_status_log(Text);
@@ -123,7 +123,7 @@ parse_env_log(Text) ->
 parse_status_log(Text) ->
   lists:map(
     fun("CLIENT_LIST" ++ _ = L) ->
-      Fields = re:split(L, "[[:blank:]]+", [{return, list}]),
+      Fields = string:split(L, "\t", [{return, list}]),
       client_save(
         #client{state = up,
                 cn = lists:nth(2, Fields),
@@ -132,3 +132,6 @@ parse_status_log(Text) ->
       (_) -> nil
       end,
     Text).
+
+is_status_log(Text) ->
+  lists:any(fun("HEADER\tCLIENT_LIST\tCommon Name" ++ _) -> true; (_) -> false end, Text).
